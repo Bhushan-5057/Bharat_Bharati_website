@@ -2,7 +2,8 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  
+  
 }
 
 @theme inline {
@@ -14,7 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    
     --foreground: #ededed;
   }
 }
@@ -23,4 +24,104 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+:root {
+  --background: #ffffff;
+
+    --font-jost: 'Jost', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  font-family: var(--font-jost);
+  margin: 0;
+  padding: 0;
+}
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  width: 100vw;  
+  background: var(--background);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999; 
+}
+
+.chakra-img {
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+html, body, #__next {
+  height: 100%;
+  margin: 0;
+}
+.custom-shape-divider-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 20;
+  pointer-events: none; 
+}
+
+.custom-shape-divider-bottom svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 161px;
+}
+
+.custom-shape-divider-bottom .shape-fill {
+  fill: #fff; 
+}
+.custom-shape-divider-bottom-1756811065 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1756811065 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 83px; 
+}
+
+.custom-shape-divider-bottom-1756811065 .shape-fill {
+    fill: #fff; 
+}
+.appoinement-bg{
+      background: linear-gradient(90deg, #e6f0ff 0%, #ffffff 50%, #f5f9ff 100%)
+}
+
+.dropdown-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db; 
+  border-radius: 9999px;
+}
+
+.dropdown-scroll::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af; 
 }
