@@ -56,3 +56,67 @@ export const getAllIntegrations = async () => {
   return response.data;
 }
 
+
+export const getAllActivities = async () => {
+  const response = await axiosInstance.get("/activities/get-all");
+  return response.data; 
+};
+
+
+export const getActivityById = async (id: number) => {
+  const response = await axiosInstance.get(`/activities/get/${id}`);
+  const activity = response.data;
+
+
+  const imageUrl = `data:image/png;base64,${activity.data}`;
+
+  return {
+    ...activity,
+    imageUrl, 
+  };
+};
+
+export const getAllEducation = async () => {
+  const response = await axiosInstance.get("/education/get-all?type=education");
+  return response.data;
+};
+
+export const getAllSchools = async () => {
+  const response = await axiosInstance.get("/education/get-all?type=school");
+  return response.data;
+};
+
+export const getSchoolById = async (id: number) => {
+  const response = await axiosInstance.get(`/education/get/${id}`);
+  return response.data;
+};
+
+
+export const getAllCities = async () => {
+  const response = await axiosInstance.get("/cities/get-all");
+  return response.data;
+};
+
+export const getCityById = async (id: number) => {
+  const response = await axiosInstance.get(`/cities/get/${id}`);
+  return response.data;
+};
+
+export const getAllImages = async () => {
+  const response = await axiosInstance.get("/gallery_image/get-all");
+  return response.data;
+};
+
+export const getImagesBId = async (id: number) => {
+  const response = await axiosInstance.get(`/gallery_image/get/${id}`);
+  return response.data;
+};
+export const getAllVideos = async () => {
+  const response = await axiosInstance.get("/gallery_video/get-all");
+  return response.data;
+};
+
+export const getVideoById = async (id: number) => {
+  const response = await axiosInstance.get(`/gallery_video/get/${id}`);
+  return response.data;
+};

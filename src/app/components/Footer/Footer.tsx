@@ -10,7 +10,7 @@ export default function Footer() {
   return (
    <footer style={{ fontFamily: 'var(--font-jost)' }}>
   <div
-    className="w-full text-white bg-cover bg-center relative"
+    className="w-full text-white bg-cover bg-center relative m-0 p-0"
     style={{ backgroundImage: `url(${IMAGES.Footer})` }}
   >
     <div className="absolute inset-0 bg-black/80 z-0"></div>

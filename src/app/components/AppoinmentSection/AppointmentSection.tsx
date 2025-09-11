@@ -18,7 +18,7 @@ const AppointmentSection = () => {
   );
 
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-  const [showSuccess, setShowSuccess] = useState(false);
+
 
   const [formData, setFormData] = useState({
     name: "",

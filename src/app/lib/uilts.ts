@@ -8,6 +8,8 @@ export const IMAGES = {
   THK: "/assets/images/thk.webp",
   VISION: "/assets/images/ourvision.webp",
   MISSION: "/assets/images/ourmission.webp",
+  NATURAL_CALAMITIES:"/assets/images/natural-calamities.webp",
+  LOADER_IMAGE:"/assets/images/ashoka-chakra-7904695_1280.png"
 };
 
 

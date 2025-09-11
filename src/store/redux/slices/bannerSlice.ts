@@ -1,14 +1,30 @@
+
 import { getAllBanners } from "@/store/api/api";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+
+export interface Banner {
+  id: number;
+  title: string;
+  image: string; 
+  description?: string;
+}
 
 
-
-export const fetchBanners = createAsyncThunk("banners/fetchAll", async () => {
-  return await getAllBanners();
-});
+export const fetchBanners = createAsyncThunk<Banner[], void, { rejectValue: string }>(
+  "banners/fetchAll",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getAllBanners();
+      return response;
+    } catch (err: unknown) {
+      if (err instanceof Error) return rejectWithValue(err.message);
+      return rejectWithValue("Failed to fetch banners");
+    }
+  }
+);
 
 interface BannerState {
-  banners: any[];
+  banners: Banner[];
   loading: boolean;
   error: string | null;
 }
@@ -29,13 +45,13 @@ const bannerSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchBanners.fulfilled, (state, action) => {
+      .addCase(fetchBanners.fulfilled, (state, action: PayloadAction<Banner[]>) => {
         state.loading = false;
         state.banners = action.payload;
       })
       .addCase(fetchBanners.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch banners";
+        state.error = action.payload ?? action.error.message ?? "Failed to fetch banners";
       });
   },
 });
