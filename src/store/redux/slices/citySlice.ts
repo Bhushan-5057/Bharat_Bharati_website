@@ -18,7 +18,6 @@ const initialState: CityState = {
   error: null,
 };
 
-// ✅ Async thunk for fetching cities
 export const fetchCities = createAsyncThunk("cities/fetchAll", async () => {
   const data = await getAllCities();
   return data;

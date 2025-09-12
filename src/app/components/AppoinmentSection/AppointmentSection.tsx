@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Send } from "lucide-react";
+import { Heart, Leaf, Send, Users } from "lucide-react";
 import { submitAppointment } from "@/store/redux/slices/appointmentSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/redux/store";
@@ -8,8 +8,6 @@ import { appointmentSchema } from "@/store/validation/appointmentSchema";
 import { ZodError } from "zod";
 import { useToast } from "@/app/ui/toast/ToastProvider";
 import { MESSAGES } from "@/app/lib/uilts";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 const AppointmentSection = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,7 +16,15 @@ const AppointmentSection = () => {
   );
 
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const today = new Date().toISOString().split("T")[0];
 
+  const getMinTime = () => {
+    if (formData.date === today) {
+      const now = new Date();
+      return now.toTimeString().slice(0, 5);
+    }
+    return "00:00";
+  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -75,12 +81,6 @@ const AppointmentSection = () => {
     }
   };
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
 
   useEffect(() => {
     if (success) {
@@ -101,7 +101,6 @@ const AppointmentSection = () => {
   return (
     <div
       className="appoinement-bg p-8 min-h-[700px] font-sans"
-      data-aos="fade-right"
     >
       <div className="max-w-6xl mx-auto">
         <div className="text-start mb-12">
@@ -118,7 +117,6 @@ const AppointmentSection = () => {
           <div
             className="flex-[2] bg-white p-8 md:p-12 border-l-5 border-green-700 rounded-l-xl rounded-r-xl shadow-lg min-h-[500px]"
             style={{ fontFamily: "var(--font-jost)" }}
-            data-aos="fade-down"
           >
             <div className="mt-4">
               <h3 className="text-xl font-bold text-gray-800">
@@ -140,24 +138,23 @@ const AppointmentSection = () => {
               </p>
               <ul className="mt-6 space-y-3 text-gray-600">
                 <li className="flex items-center">
-                  <span className="text-green-500 text-xl mr-2">🍃</span>
+                  <span className="text-green-500 text-xl mr-2"><Leaf/></span>
                   Empowering minds, nurturing harmony
                 </li>
                 <li className="flex items-center">
-                  <span className="text-red-500 text-xl mr-2">❤️</span>
+                  <span className="text-red-500 text-xl mr-2"><Heart/></span>
                   We listen, we care, we grow together.
                 </li>
                 <li className="flex items-center">
-                  <span className="text-red-500 text-xl mr-2">👥</span>
+                  <span className="text-red-500 text-xl mr-2"><Users/></span>
                   Join a family of purpose and peace.
                 </li>
               </ul>
             </div>
           </div>
-
           <div
             className="flex-[3] bg-white p-8 md:p-12 border-l-4 border-green-700 rounded-xl shadow-md min-h-[500px]"
-            data-aos="fade-left"
+            
           >
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -176,7 +173,7 @@ const AppointmentSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 focus:outline-none focus:border-red-500"
+                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -194,11 +191,10 @@ const AppointmentSection = () => {
                     value={formData.contact_number}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 focus:outline-none focus:border-red-500"
+                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
                   />
                 </div>
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col">
                   <label
@@ -215,7 +211,7 @@ const AppointmentSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 focus:outline-none focus:border-red-500"
+                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -233,11 +229,10 @@ const AppointmentSection = () => {
                     value={formData.reason_of_meeting}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 focus:outline-none focus:border-red-500"
+                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
                   />
                 </div>
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col">
                   <label
@@ -250,10 +245,11 @@ const AppointmentSection = () => {
                     id="date"
                     name="date"
                     type="date"
+                    min={today}
                     value={formData.date}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 focus:outline-none focus:border-red-500"
+                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black focus:outline-none focus:border-red-500"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -267,14 +263,14 @@ const AppointmentSection = () => {
                     id="time"
                     name="time"
                     type="time"
+                    min={getMinTime()}
                     value={formData.time}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 focus:outline-none focus:border-red-500"
+                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black focus:outline-none focus:border-red-500"
                   />
                 </div>
               </div>
-
               <div className="flex flex-col">
                 <label
                   htmlFor="your_expectation"
@@ -289,10 +285,9 @@ const AppointmentSection = () => {
                   placeholder="Enter your expectation"
                   value={formData.your_expectation}
                   onChange={handleChange}
-                  className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 focus:outline-none focus:border-red-500"
+                  className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
                 />
               </div>
-
               <div className="flex flex-col">
                 <label
                   htmlFor="more_details"
@@ -304,13 +299,12 @@ const AppointmentSection = () => {
                   id="more_details"
                   name="more_details"
                   placeholder="Enter more details"
-                  rows={0}
+                  rows={3}
                   value={formData.more_details}
                   onChange={handleChange}
-                  className="mt-1 block w-full border-2 border-gray-200 bg-transparent rounded-lg p-3 resize-y focus:outline-none focus:border-red-500"
+                  className="mt-1 block w-full border-2 border-gray-200 bg-transparent rounded-lg p-3 resize-y text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
                 />
               </div>
-
               <div className="flex justify-center">
                 <button
                   type="submit"

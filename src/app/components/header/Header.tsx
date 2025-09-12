@@ -36,15 +36,27 @@ export default function Header() {
     const blob = new Blob([pdfData], { type: "application/pdf" });
     const url = URL.createObjectURL(blob);
 
-    const newWindow = window.open("", "_blank");
-    if (newWindow) {
-      newWindow.document.title = fileName;
-      newWindow.document.write(`
-        <head><title>${fileName}</title></head>
-        <body style="margin:0">
-          <iframe src="${url}" width="100%" height="100%" style="border:none;"></iframe>
-        </body>
-      `);
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = fileName || "भारत भारती ट्रस्ट | राष्ट्रीय एकात्मता को समर्पित";
+      link.target = "_blank";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      const newWindow = window.open("", "_blank");
+      if (newWindow) {
+        newWindow.document.title = fileName;
+        newWindow.document.write(`
+          <head><title>${fileName}</title></head>
+          <body style="margin:0">
+            <iframe src="${url}" width="100%" height="100%" style="border:none;"></iframe>
+          </body>
+        `);
+      }
     }
   };
 
@@ -111,8 +123,6 @@ export default function Header() {
             priority
           />
         </Link>
-
-        {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-6 text-[15px] font-semibold text-gray-900">
           {navItems.map((item, idx) =>
             item.dropdown ? (
@@ -138,7 +148,8 @@ export default function Header() {
                   <ul className="flex flex-col text-sm font-normal">
                     {item.dropdown.map((drop: any, i: number) => (
                       <li key={i}>
-                        {drop.type === "certificate" || drop.type === "activity" ? (
+                        {drop.type === "certificate" ||
+                        drop.type === "activity" ? (
                           <button
                             onClick={() => {
                               if (drop.type === "certificate")
@@ -174,8 +185,6 @@ export default function Header() {
             )
           )}
         </nav>
-
-        {/* Mobile Hamburger */}
         <div className="lg:hidden">
           <button
             className="p-2 rounded-md focus:outline-none"
@@ -184,7 +193,7 @@ export default function Header() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-7 w-7"
+              className="h-7 w-7 text-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -200,15 +209,12 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Overlay */}
       <div
         className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-500 ${
           menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={() => setMenuOpen(false)}
       />
-
-      {/* Mobile Nav */}
       <div
         className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg z-50 transform transition-transform duration-500 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
@@ -226,7 +232,7 @@ export default function Header() {
           <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-6 w-6 text-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -241,20 +247,20 @@ export default function Header() {
           </button>
         </div>
 
-        <nav className="flex flex-col px-6 py-4 text-sm font-medium h-full overflow-y-auto">
+        <nav className="flex flex-col px-6 py-4 text-sm font-medium h-full overflow-y-auto text-black">
           {navItems.map((item, idx) => (
             <div key={idx} className="border-b py-2">
               {item.dropdown ? (
                 <div>
                   <button
                     onClick={() => toggleDropdown(item.name)}
-                    className="w-full flex justify-between items-center hover:text-red-600"
+                    className="w-full flex justify-between items-center hover:text-red-600 text-black"
                   >
                     {item.name}
                     <svg
                       className={`w-4 h-4 transform transition-transform ${
                         openDropdown === item.name ? "rotate-180" : ""
-                      }`}
+                      } text-black`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -282,14 +288,14 @@ export default function Header() {
                                   handleOpenActivity(drop.id);
                                 setMenuOpen(false);
                               }}
-                              className="block py-1 w-full text-left hover:text-red-600"
+                              className="block py-1 w-full text-left hover:text-red-600 text-black"
                             >
                               {drop.name}
                             </button>
                           ) : (
                             <Link
                               href={drop.href}
-                              className="block py-1 hover:text-red-600"
+                              className="block py-1 hover:text-red-600 text-black"
                               onClick={() => setMenuOpen(false)}
                             >
                               {drop.name}
@@ -303,7 +309,7 @@ export default function Header() {
               ) : (
                 <Link
                   href={item.href ?? "#"}
-                  className="block hover:text-red-600 transition-colors"
+                  className="block hover:text-red-600 transition-colors text-black"
                   onClick={() => setMenuOpen(false)}
                 >
                   {item.name}

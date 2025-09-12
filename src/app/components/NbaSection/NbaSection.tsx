@@ -41,7 +41,7 @@ const NbaSection = () => {
 
     return (
         <div className="bg-blue-100 p-8 font-sans text-center text-blue-400">
-            <div className="container mx-auto max-w-6xl" data-aos="fade-up">
+            <div className="container mx-auto max-w-6xl">
                 <div className="text-2xl font-semibold text-blue-400 mb-2">NBA</div>
 
                 <h1 className="relative text-3xl md:text-4xl font-bold text-red-500 mb-8">
@@ -63,7 +63,7 @@ const NbaSection = () => {
                 <div 
                     className="text-start text-lg md:text-xl leading-[1.8] space-y-4 mb-8 text-gray-600 font-semibold"
                     style={{ fontFamily: 'var(--font-jost)' }}
-                    data-aos="fade-down"
+                   
                 >
                     <p>
                         I express my sincere gratitude and humility for being honoured by Dr. Anil Sahastrabudhe
@@ -91,7 +91,7 @@ const NbaSection = () => {
                 </div>
 
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8" data-aos="fade-right">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8" >
                     {shuffledImages.map((item, index) => (
                         <div
                             key={index}

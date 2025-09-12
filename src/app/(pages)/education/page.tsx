@@ -104,7 +104,7 @@ export default function EducationPage() {
                   <img
                     src={`data:${getMime(mainImage.file_name)};base64,${mainImage.data}`}
                     alt={mainImage.file_name}
-                    className={`w-[573px] h-[322px] object-contain rounded-lg shadow-md transition-opacity ${loaded ? "opacity-100" : "opacity-0"}`}
+                    className={`w-[573px] h-[322px] object-contain rounded-lg  transition-opacity ${loaded ? "opacity-100" : "opacity-0"}`}
                     onLoad={() => setLoaded(true)}
                     onError={() => setImgError(true)}
                   />
@@ -152,7 +152,7 @@ export default function EducationPage() {
             )}
           </div>
 
-          <div className="md:pl-0" data-aos="fade-left">
+          <div className="md:pl-0">
             {loading ? (
               <div className="space-y-4">
                 {Array(4)

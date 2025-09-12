@@ -4,23 +4,12 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { IMAGES } from "@/app/lib/uilts";
 import { Check } from "lucide-react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 export default function VisionMissionSection() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
   return (
-    <section
-      className="w-full bg-[#e42d29] py-12 px-4 md:px-12 font-jost"
-     
-    >
-      <div className="grid md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto"  data-aos="fade-left">
-        <div className="flex justify-center" data-aos="fade-right">
+    <section className="w-full bg-[#e42d29] py-12 px-4 md:px-12 font-jost">
+      <div className="grid md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
+        <div className="flex justify-center">
           <Image
             src={IMAGES.VISION}
             alt="Our Vision"
@@ -32,7 +21,6 @@ export default function VisionMissionSection() {
         <div
           className="text-center md:text-center"
           style={{ fontFamily: "var(--font-jost)" }}
-           data-aos="fade-up"
         >
           <h2 className="text-3xl md:text-4xl lg:text-6xl font-extrabold text-[#34498c] mb-6">
             OUR VISION
@@ -54,9 +42,9 @@ export default function VisionMissionSection() {
         </div>
       </div>
 
-      <div className="bg-[#054281] mt-12 py-20 px-6 md:px-16 w-full font-jost"   >
-        <div className="grid md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto" data-aos="fade-down">
-          <div className="text-center md:text-left max-w-xl xl:px-14" data-aos="fade-up">
+      <div className="bg-[#054281] mt-12 py-20 px-6 md:px-16 w-full font-jost">
+        <div className="grid md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
+          <div className="text-center md:text-left max-w-xl xl:px-14">
             <h2 className="text-3xl md:text-4xl lg:text-6xl font-extrabold text-[#e42d29] mb-6">
               OUR MISSION
             </h2>
@@ -77,7 +65,7 @@ export default function VisionMissionSection() {
               ))}
             </ul>
           </div>
-          <div className="flex justify-center" data-aos="fade-left">
+          <div className="flex justify-center">
             <Image
               src={IMAGES.MISSION}
               alt="Our Mission"

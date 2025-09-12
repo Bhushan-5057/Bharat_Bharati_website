@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "next/navigation";
 import { AppDispatch, RootState } from "@/store/redux/store";
 import { BookOpen, X, ChevronLeft, ChevronRight } from "lucide-react";
-import { fetchSchoolById, fetchSchools } from "@/store/redux/slices/schoolSlice";
+import {
+  fetchSchoolById,
+  fetchSchools,
+} from "@/store/redux/slices/schoolSlice";
 
 export default function SchoolDetailPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -57,8 +60,10 @@ export default function SchoolDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-800">
-
+    <div
+      className="min-h-screen bg-[linear-gradient(90deg,#ffffff_0%,#f5f9ff_50%,#e6f0ff_100%)] text-gray-800"
+      style={{ fontFamily: 'var(--font-jost)' }}
+    >
       <header className="max-w-7xl mx-auto px-4 pt-10 pb-6">
         <div className="flex items-center justify-center text-gray-400 mb-2">
           <span className="tracking-widest opacity-60">:::::</span>
@@ -73,9 +78,7 @@ export default function SchoolDetailPage() {
           </div>
         ) : (
           <>
-            <h1 className="text-4xl text-[#222222] font-bold text-center">
-              {mainTitle}
-            </h1>
+            <h1 className="text-4xl text-[#222222] font-bold text-center">{mainTitle}</h1>
             {subTitle && (
               <h2 className="text-2xl text-gray-700 font-semibold text-center mt-1">
                 ({subTitle})
@@ -115,9 +118,8 @@ export default function SchoolDetailPage() {
                 <img
                   src={`data:${getMime(mainImage.file_name)};base64,${mainImage.data}`}
                   alt={mainImage.file_name}
-                  className={`w-[1036px] max-h-[500px] object-contain rounded-lg  ${
-                    loaded ? "block" : "hidden"
-                  }`}
+                  className={`w-[1036px] max-h-[500px] object-contain rounded-lg  ${loaded ? "block" : "hidden"
+                    }`}
                   onLoad={() => setLoaded(true)}
                   onError={() => setImgError(true)}
                 />
@@ -125,6 +127,7 @@ export default function SchoolDetailPage() {
             </>
           )}
         </div>
+
         <div>
           {loading ? (
             <div className="space-y-3">
@@ -178,6 +181,7 @@ export default function SchoolDetailPage() {
           </div>
         </div>
       </section>
+
       {otherImages.length > 0 && (
         <section className="max-w-6xl mx-auto px-4 py-8">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
@@ -197,11 +201,13 @@ export default function SchoolDetailPage() {
           </div>
         </section>
       )}
+
       {isOpen && otherImages.length > 0 && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <div className="relative max-w-full max-h-full">
             <img
-              src={`data:${getMime(otherImages[photoIndex].file_name)};base64,${otherImages[photoIndex].data}`}
+              src={`data:${getMime(otherImages[photoIndex].file_name)};base64,${otherImages[photoIndex].data
+                }`}
               alt={`Gallery image ${photoIndex + 1}`}
               className="w-auto h-auto max-w-full max-h-screen rounded-lg shadow-lg"
             />
@@ -229,5 +235,6 @@ export default function SchoolDetailPage() {
         </div>
       )}
     </div>
+
   );
 }

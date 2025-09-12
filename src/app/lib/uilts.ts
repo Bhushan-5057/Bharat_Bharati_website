@@ -8,17 +8,17 @@ export const IMAGES = {
   THK: "/assets/images/thk.webp",
   VISION: "/assets/images/ourvision.webp",
   MISSION: "/assets/images/ourmission.webp",
-  NATURAL_CALAMITIES:"/assets/images/natural-calamities.webp",
-  LOADER_IMAGE:"/assets/images/ashoka-chakra-7904695_1280.png"
+  NATURAL_CALAMITIES: "/assets/images/natural-calamities.webp",
+  LOADER_IMAGE: "/assets/images/ashoka-chakra-7904695_1280.png"
 };
 
 
 export const MESSAGES = {
-  APPOINTMENT_SUCCESS: " Your appointment has been scheduled successfully!",
-  APPOINTMENT_FAILURE: "Unable to schedule your appointment. Please try again.",
-  VALIDATION_ERROR: "Some details are missing or incorrect. Please review the form.",
-  SERVER_ERROR: "Something went wrong on our side. Please try again shortly.",
-  NETWORK_ERROR: "Network issue detected. Check your internet connection and retry.",
+  APPOINTMENT_SUCCESS: "Appointment booked!",
+  APPOINTMENT_FAILURE: "Booking failed. Try again.",
+  VALIDATION_ERROR: "Form has errors. Fix and retry.",
+  SERVER_ERROR: "Server error. Please retry later.",
+  NETWORK_ERROR: "No internet. Check connection.",
 };
 
 

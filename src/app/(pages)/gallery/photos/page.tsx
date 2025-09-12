@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/redux/store";
 import { fetchAllGalleryImages } from "@/store/redux/slices/gallerySlice";
-import { X, ChevronLeft, ChevronRight, GalleryHorizontal } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, GalleryHorizontal, Image } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -66,7 +66,6 @@ const GalleryImagesPage = () => {
       }}
     ></div>
 
-    {/* Awesome Grid */}
     <div
       className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8"
       data-aos="fade-right"
@@ -82,9 +81,8 @@ const GalleryImagesPage = () => {
             alt={item.file_name || `Gallery image ${index + 1}`}
             className="w-full h-64 object-cover rounded-xl"
           />
-          {/* Optional overlay on hover */}
           <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition flex items-center justify-center text-white text-lg font-semibold">
-            View
+           <Image className="w-6 h-6"/>
           </div>
         </div>
       ))}

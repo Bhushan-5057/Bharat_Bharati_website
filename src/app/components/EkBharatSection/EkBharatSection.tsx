@@ -5,7 +5,6 @@ export default function EkBhartiSection() {
   return (
   <section
   className="bg-[linear-gradient(90deg,#ffffff_0%,#f5f9ff_50%,#e6f0ff_100%)] py-12 px-4 md:px-12"
-  data-aos="fade-down"
   style={{ fontFamily: 'var(--font-jost)' }}
 >
   <div className="max-w-7xl mx-auto">
@@ -25,9 +24,9 @@ export default function EkBhartiSection() {
       ></div>
     </div>
 
-    <div className="grid md:grid-cols-[40%_60%] gap-6 items-start" data-aos="fade-left">
+    <div className="grid md:grid-cols-[40%_60%] gap-6 items-start">
 
-      <div className="flex justify-center md:justify-start" data-aos="fade-right">
+      <div className="flex justify-center md:justify-start">
         <Image
           src={IMAGES.Ek_Bharat}
           alt="Ek Bharat Shreshtha Bharat"

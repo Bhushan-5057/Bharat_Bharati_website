@@ -6,12 +6,11 @@ export default function UnifierSection() {
   return (
    <section
   className="bg-[linear-gradient(90deg,#ffffff_0%,#f5f9ff_50%,#e6f0ff_100%)] py-12 px-4 md:px-12"
-  data-aos="fade-right"
   style={{ fontFamily: 'var(--font-jost)' }}
 >
   <div className="grid md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
     
-    <div className="flex justify-center" data-aos="fade-up">
+    <div className="flex justify-center">
       <Image
         src={IMAGES.MODIJI}
         alt="Unifier of India"
@@ -20,9 +19,7 @@ export default function UnifierSection() {
         className="rounded-lg object-contain"
       />
     </div>
-
-    {/* Text */}
-    <div data-aos="fade-down">
+    <div >
       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[3.5rem] font-bold text-[#004080] mb-4 leading-snug">
         THE UNIFIER OF INDIA
       </h2>

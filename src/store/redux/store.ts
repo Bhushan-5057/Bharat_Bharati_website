@@ -12,6 +12,7 @@ import cityReducer from "./slices/citySlice";
 import cityDetailReducer from "./slices/cityDetailSlice";
 import galleryReducer from "@/store/redux/slices/gallerySlice";
 import videosReducer from "@/store/redux/slices/videoSlice";
+import donationReducer from "@/store/redux/slices/donationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
     cityDetail: cityDetailReducer,
     gallery: galleryReducer,
     videos: videosReducer,
+    donations: donationReducer
   },
 });
 

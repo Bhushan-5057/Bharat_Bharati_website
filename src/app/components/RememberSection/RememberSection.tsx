@@ -1,23 +1,11 @@
-"use client";
-
-import { useEffect } from "react";
 import Image from "next/image";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { IMAGES } from "@/app/lib/uilts";
 
 export default function RememberSection() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
-
+  
   return (
 <section
   className="py-12 px-4 md:px-16 bg-white"
-  data-aos="fade-left"
   style={{ fontFamily: 'var(--font-jost)' }}
 >
   <div className="max-w-7xl mx-auto">

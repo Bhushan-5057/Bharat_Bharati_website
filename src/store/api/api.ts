@@ -42,7 +42,7 @@ export const getCertificateById = async (id: number) => {
   });
 
   const contentDisposition = response.headers["content-disposition"];
-  let fileName = "document.pdf";
+  let fileName = "भारत भारती ट्रस्ट | राष्ट्रीय एकात्मता को समर्पित";
   if (contentDisposition) {
     const match = contentDisposition.match(/filename="?([^"]+)"?/);
     if (match?.[1]) fileName = match[1];
@@ -118,5 +118,10 @@ export const getAllVideos = async () => {
 
 export const getVideoById = async (id: number) => {
   const response = await axiosInstance.get(`/gallery_video/get/${id}`);
+  return response.data;
+};
+
+export const getAllDonations = async () => {
+  const response = await axiosInstance.get("/donation_page/get-all");
   return response.data;
 };
