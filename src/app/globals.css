@@ -125,3 +125,14 @@ html, body, #__next {
 .dropdown-scroll::-webkit-scrollbar-thumb:hover {
   background: #9ca3af; 
 }
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
+}
+
+

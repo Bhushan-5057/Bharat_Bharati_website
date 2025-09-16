@@ -125,3 +125,13 @@ export const getAllDonations = async () => {
   const response = await axiosInstance.get("/donation_page/get-all");
   return response.data;
 };
+
+export const getAllBlogs = async () => {
+  const response = await axiosInstance.get("/blogs/get-all");
+  return response.data;
+};
+
+export const getBlogBySlug = async (slug: string) => {
+  const response = await axiosInstance.get(`/blogs/get/${slug}`);
+  return response.data;
+};
