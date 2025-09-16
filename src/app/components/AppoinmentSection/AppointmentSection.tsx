@@ -18,14 +18,6 @@ const AppointmentSection = () => {
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const today = new Date().toISOString().split("T")[0];
 
-  const getMinTime = () => {
-    if (formData.date === today) {
-      const now = new Date();
-      return now.toTimeString().slice(0, 5);
-    }
-    return "00:00";
-  };
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,6 +36,14 @@ const AppointmentSection = () => {
   };
 
   const { showToast } = useToast();
+
+  const getMinTime = () => {
+    if (formData.date === today) {
+      const now = new Date();
+      return now.toTimeString().slice(0, 5);
+    }
+    return "00:00";
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,13 +74,12 @@ const AppointmentSection = () => {
         });
         setFormErrors(fieldErrors);
 
-        showToast(MESSAGES.VALIDATION_ERROR);
+        showToast(MESSAGES.VALIDATION_ERROR, "error");
       } else {
         showToast(MESSAGES.SERVER_ERROR, "error");
       }
     }
   };
-
 
   useEffect(() => {
     if (success) {
@@ -99,9 +98,7 @@ const AppointmentSection = () => {
   }, [success]);
 
   return (
-    <div
-      className="appoinement-bg p-8 min-h-[700px] font-sans"
-    >
+    <div className="appoinement-bg p-8 min-h-[700px] font-sans">
       <div className="max-w-6xl mx-auto">
         <div className="text-start mb-12">
           <div className="text-sm font-semibold text-green-800 tracking-wide">
@@ -114,55 +111,38 @@ const AppointmentSection = () => {
         </div>
 
         <div className="md:flex md:items-stretch gap-6 space-y-6 md:space-y-0">
-          <div
-            className="flex-[2] bg-white p-8 md:p-12 border-l-5 border-green-700 rounded-l-xl rounded-r-xl shadow-lg min-h-[500px]"
-            style={{ fontFamily: "var(--font-jost)" }}
-          >
+          <div className="flex-[2] bg-white p-8 md:p-12 border-l-5 border-green-700 rounded-l-xl rounded-r-xl shadow-lg min-h-[500px]" style={{ fontFamily: "var(--font-jost)" }}>
             <div className="mt-4">
-              <h3 className="text-xl font-bold text-gray-800">
-                Your Voice Matters
-              </h3>
+              <h3 className="text-xl font-bold text-gray-800">Your Voice Matters</h3>
               <p className="mt-4 text-gray-600 leading-relaxed">
                 At Bharat Bharti, we believe in{" "}
-                <span className="font-bold">
-                  Celebrating Unity in Diversity
-                </span>
-                . Every message you share contributes to the beautiful mosaic of
-                cultures, voices, and ideas that define who we are.
+                <span className="font-bold">Celebrating Unity in Diversity</span>. Every message you share contributes to the beautiful mosaic of cultures, voices, and ideas that define who we are.
               </p>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                We’re more than just an organization — we’re a movement built on
-                empathy, inclusion, and shared purpose. Whether you have a
-                question, suggestion, or simply want to connect, we're here to
-                listen and grow together.
+                We’re more than just an organization — we’re a movement built on empathy, inclusion, and shared purpose. Whether you have a question, suggestion, or simply want to connect, we're here to listen and grow together.
               </p>
               <ul className="mt-6 space-y-3 text-gray-600">
                 <li className="flex items-center">
-                  <span className="text-green-500 text-xl mr-2"><Leaf/></span>
+                  <span className="text-green-500 text-xl mr-2"><Leaf /></span>
                   Empowering minds, nurturing harmony
                 </li>
                 <li className="flex items-center">
-                  <span className="text-red-500 text-xl mr-2"><Heart/></span>
+                  <span className="text-red-500 text-xl mr-2"><Heart /></span>
                   We listen, we care, we grow together.
                 </li>
                 <li className="flex items-center">
-                  <span className="text-red-500 text-xl mr-2"><Users/></span>
+                  <span className="text-red-500 text-xl mr-2"><Users /></span>
                   Join a family of purpose and peace.
                 </li>
               </ul>
             </div>
           </div>
-          <div
-            className="flex-[3] bg-white p-8 md:p-12 border-l-4 border-green-700 rounded-xl shadow-md min-h-[500px]"
-            
-          >
+
+          <div className="flex-[3] bg-white p-8 md:p-12 border-l-4 border-green-700 rounded-xl shadow-md min-h-[500px]">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col">
-                  <label
-                    htmlFor="name"
-                    className="text-sm font-medium text-gray-700 mb-1"
-                  >
+                  <label htmlFor="name" className="text-sm font-medium text-gray-700 mb-1">
                     Your Name <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -172,15 +152,13 @@ const AppointmentSection = () => {
                     placeholder="Enter your full name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
+                    className={`mt-1 block w-full border-b-2 ${formErrors.name ? "border-red-500" : "border-gray-200"} bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500`}
                   />
+                  {formErrors.name && <span className="text-red-500 text-sm mt-1">{formErrors.name}</span>}
                 </div>
+
                 <div className="flex flex-col">
-                  <label
-                    htmlFor="contact_number"
-                    className="text-sm font-medium text-gray-700 mb-1"
-                  >
+                  <label htmlFor="contact_number" className="text-sm font-medium text-gray-700 mb-1">
                     Phone Number <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -190,17 +168,14 @@ const AppointmentSection = () => {
                     placeholder="Enter your phone number"
                     value={formData.contact_number}
                     onChange={handleChange}
-                    required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
+                    className={`mt-1 block w-full border-b-2 ${formErrors.contact_number ? "border-red-500" : "border-gray-200"} bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500`}
                   />
+                  {formErrors.contact_number && <span className="text-red-500 text-sm mt-1">{formErrors.contact_number}</span>}
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col">
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-medium text-gray-700 mb-1"
-                  >
+                  <label htmlFor="email" className="text-sm font-medium text-gray-700 mb-1">
                     Email Address <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -210,15 +185,13 @@ const AppointmentSection = () => {
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
+                    className={`mt-1 block w-full border-b-2 ${formErrors.email ? "border-red-500" : "border-gray-200"} bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500`}
                   />
+                  {formErrors.email && <span className="text-red-500 text-sm mt-1">{formErrors.email}</span>}
                 </div>
+
                 <div className="flex flex-col">
-                  <label
-                    htmlFor="reason_of_meeting"
-                    className="text-sm font-medium text-gray-700 mb-1"
-                  >
+                  <label htmlFor="reason_of_meeting" className="text-sm font-medium text-gray-700 mb-1">
                     Reason of Meeting <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -228,17 +201,14 @@ const AppointmentSection = () => {
                     placeholder="Enter reason of meeting"
                     value={formData.reason_of_meeting}
                     onChange={handleChange}
-                    required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
+                    className={`mt-1 block w-full border-b-2 ${formErrors.reason_of_meeting ? "border-red-500" : "border-gray-200"} bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500`}
                   />
+                  {formErrors.reason_of_meeting && <span className="text-red-500 text-sm mt-1">{formErrors.reason_of_meeting}</span>}
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col">
-                  <label
-                    htmlFor="date"
-                    className="text-sm font-medium text-gray-700 mb-1"
-                  >
+                  <label htmlFor="date" className="text-sm font-medium text-gray-700 mb-1">
                     Date <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -248,15 +218,13 @@ const AppointmentSection = () => {
                     min={today}
                     value={formData.date}
                     onChange={handleChange}
-                    required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black focus:outline-none focus:border-red-500"
+                    className={`mt-1 block w-full border-b-2 ${formErrors.date ? "border-red-500" : "border-gray-200"} bg-transparent py-2 px-0 text-black focus:outline-none focus:border-red-500`}
                   />
+                  {formErrors.date && <span className="text-red-500 text-sm mt-1">{formErrors.date}</span>}
                 </div>
+
                 <div className="flex flex-col">
-                  <label
-                    htmlFor="time"
-                    className="text-sm font-medium text-gray-700 mb-1"
-                  >
+                  <label htmlFor="time" className="text-sm font-medium text-gray-700 mb-1">
                     Time <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -266,18 +234,13 @@ const AppointmentSection = () => {
                     min={getMinTime()}
                     value={formData.time}
                     onChange={handleChange}
-                    required
-                    className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black focus:outline-none focus:border-red-500"
+                    className={`mt-1 block w-full border-b-2 ${formErrors.time ? "border-red-500" : "border-gray-200"} bg-transparent py-2 px-0 text-black focus:outline-none focus:border-red-500`}
                   />
+                  {formErrors.time && <span className="text-red-500 text-sm mt-1">{formErrors.time}</span>}
                 </div>
               </div>
               <div className="flex flex-col">
-                <label
-                  htmlFor="your_expectation"
-                  className="text-sm font-medium text-gray-700 mb-1"
-                >
-                  Your Expectation
-                </label>
+                <label htmlFor="your_expectation" className="text-sm font-medium text-gray-700 mb-1">Your Expectation</label>
                 <input
                   id="your_expectation"
                   name="your_expectation"
@@ -288,13 +251,9 @@ const AppointmentSection = () => {
                   className="mt-1 block w-full border-b-2 border-gray-200 bg-transparent py-2 px-0 text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
                 />
               </div>
+
               <div className="flex flex-col">
-                <label
-                  htmlFor="more_details"
-                  className="text-sm font-medium text-gray-700 mb-1"
-                >
-                  More Details
-                </label>
+                <label htmlFor="more_details" className="text-sm font-medium text-gray-700 mb-1">More Details</label>
                 <textarea
                   id="more_details"
                   name="more_details"
@@ -305,6 +264,7 @@ const AppointmentSection = () => {
                   className="mt-1 block w-full border-2 border-gray-200 bg-transparent rounded-lg p-3 resize-y text-black placeholder-gray-400 focus:outline-none focus:border-red-500"
                 />
               </div>
+
               <div className="flex justify-center">
                 <button
                   type="submit"

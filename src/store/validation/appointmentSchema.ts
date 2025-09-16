@@ -4,7 +4,10 @@ export const appointmentSchema = z.object({
   name: z
     .string()
     .min(2, "Name must be at least 2 characters")
-    .regex(/^[A-Za-z\s]+$/, "Name should only contain letters and spaces"),
+    .refine(
+      (val) => /^[A-Za-z]+(?: [A-Za-z]+)*$/.test(val) && val.trim().length === val.length,
+      "Name should only contain letters, single spaces between words, and no leading/trailing spaces"
+    ),
 
   email: z
     .string()
@@ -21,7 +24,13 @@ export const appointmentSchema = z.object({
   date: z.string().min(1, "Date is required"),
   time: z.string().min(1, "Time is required"),
 
-  reason_of_meeting: z.string().min(1, "Reason of meeting is required"),
+  reason_of_meeting: z
+    .string()
+    .min(1, "Reason of meeting is required")
+    .refine(
+      (val) => val.trim().length === val.length,
+      "Reason cannot start or end with a space"
+    ),
 
   your_expectation: z.string().optional(),
   more_details: z.string().optional(),
