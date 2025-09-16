@@ -104,7 +104,6 @@ export default function Header() {
         { name: "Videos", href: "/gallery/videos" },
       ],
     },
-    { name: "Contact", href: "/contact" },
   ];
 
   return (
