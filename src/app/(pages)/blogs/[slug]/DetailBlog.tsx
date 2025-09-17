@@ -42,7 +42,7 @@ function DetailsBlog({ blog }: DetailBlogProps) {
                 initial={{ opacity: 0, y: -40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-3xl sm:text-5xl font-extrabold text-center text-gray-900 leading-snug mb-6"
+                className="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 leading-snug mb-6"
             >
                 {blog?.title}
             </motion.h1>
