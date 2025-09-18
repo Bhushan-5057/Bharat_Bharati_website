@@ -85,12 +85,9 @@ function BlogsPage() {
                                 />
                             </div>
                         </div>
-
                         <div className="bg-white p-4 rounded-2xl shadow">
-                            <h4 className="text-lg font-semibold text-gray-800 mb-3">
-                                Categories
-                            </h4>
-                            <ul className="space-y-2">
+                            <h4 className="text-lg font-semibold text-gray-800 mb-3">Categories</h4>
+                            <ul className="space-y-2 max-h-64 overflow-y-auto pr-1">
                                 {categories.map((cat, idx) => (
                                     <li key={idx}>
                                         <button
@@ -106,6 +103,7 @@ function BlogsPage() {
                                 ))}
                             </ul>
                         </div>
+
                     </aside>
 
                     <div

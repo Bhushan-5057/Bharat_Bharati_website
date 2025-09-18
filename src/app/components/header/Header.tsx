@@ -274,14 +274,11 @@ export default function Header() {
                     <ul className="pl-4 mt-2 space-y-1 text-sm font-normal">
                       {item.dropdown.map((drop: any, i: number) => (
                         <li key={i}>
-                          {drop.type === "certificate" ||
-                          drop.type === "activity" ? (
+                          {drop.type === "certificate" || drop.type === "activity" ? (
                             <button
                               onClick={() => {
-                                if (drop.type === "certificate")
-                                  handleOpenPublication(drop.id);
-                                else if (drop.type === "activity")
-                                  handleOpenActivity(drop.id);
+                                if (drop.type === "certificate") handleOpenPublication(drop.id);
+                                else if (drop.type === "activity") handleOpenActivity(drop.id);
                                 setMenuOpen(false);
                               }}
                               className="block py-1 w-full text-left hover:text-red-600 text-black"
