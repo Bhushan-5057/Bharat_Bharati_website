@@ -39,13 +39,13 @@ export default function RememberSection() {
 
       
       <div className="md:w-1/3 bg-white shadow-lg rounded-lg p-6 flex flex-col">
-        <p className="text-[20px] text-gray-700 leading-[1.8] mb-4 font-semibold">
+        <p className="text-[18px] text-gray-700 leading-[1.8] mb-4 font-semibold">
           Vallabhbhai Jhaverbhai Patel, commonly known as Sardar Patel, who
           served as the first Deputy Prime Minister and Home Minister of India
           from 1947 to 1950, was also known as the "unifier and the principal
           architect of modern India".
         </p>
-        <p className="text-[20px] text-gray-700 leading-[1.8] font-semibold">
+        <p className="text-[18px] text-gray-700 leading-[1.8] font-semibold">
           The 565 self-governing princely states under direct British rule had
           been released from British suzerainty under his leadership by the
           Indian Independence Act 1947.
@@ -53,14 +53,14 @@ export default function RememberSection() {
       </div>
 
       <div className="md:w-1/3 bg-white shadow-lg rounded-lg p-6 flex flex-col">
-        <p className="text-[20px] text-gray-700 leading-[1.8] mb-4 font-semibold">
+        <p className="text-[18px] text-gray-700 leading-[1.8] mb-4 font-semibold">
           He used his skills to consolidate India, which lay in a fragmented
           and fluid state at the time of independence in 1947. With his
           commitment to national integration, Patel persuaded almost every
           princely state to accede to India, earning him the nickname "Iron
           Man of India".
         </p>
-        <p className="text-[20px] text-gray-700 leading-[1.8] font-semibold">
+        <p className="text-[18px] text-gray-700 leading-[1.8] font-semibold">
           He is indeed the epitome of national unity and integrity.
           Participated in several movements against Britishers, Vallabhbhai
           Patel was born on October 31, 1875, in Nadiad city of Kheda

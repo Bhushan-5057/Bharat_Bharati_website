@@ -23,7 +23,7 @@ export default function UnifierSection() {
       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[3.5rem] font-bold text-[#004080] mb-4 leading-snug">
         THE UNIFIER OF INDIA
       </h2>
-      <p className="text-[20px] sm:text-[20px] md:text-[20px] text-[#5E6FA6] leading-[1.8]">
+      <p className="text-[18px] sm:text-[18px] md:text-[18px] text-[#5E6FA6] leading-[1.8]">
         On <span className="font-semibold">31st October, 2015</span>, while celebrating{" "}
         <span className="text-[#d63384] font-semibold">Rashtriya Ekta Divas</span> to commemorate the birth anniversary of{" "}
         <span className="font-extrabold">Sardar Vallabhbhai Patel</span>, Hon’ble{" "}
