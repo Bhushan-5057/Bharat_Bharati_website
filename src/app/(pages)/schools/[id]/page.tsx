@@ -224,7 +224,6 @@ export default function SchoolDetailPage() {
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
-
             <button
               onClick={handleNext}
               className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 text-white shadow-lg hover:bg-black/80 transition"

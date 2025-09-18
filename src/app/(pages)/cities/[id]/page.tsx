@@ -7,7 +7,6 @@ import { AppDispatch, RootState } from "@/store/redux/store";
 import { Landmark, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { fetchCityById } from "@/store/redux/slices/cityDetailSlice";
 
-
 export default function CityDetailPage() {
   const dispatch = useDispatch<AppDispatch>();
   const { cityDetail, loading } = useSelector(
@@ -50,6 +49,19 @@ export default function CityDetailPage() {
       (prev) => (prev + otherImages.length - 1) % otherImages.length
     );
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, otherImages.length]);
 
   return (
     <div
@@ -96,8 +108,9 @@ export default function CityDetailPage() {
                 <img
                   src={`data:${getMime(mainImage.file_name)};base64,${mainImage.data}`}
                   alt={mainImage.file_name}
-                  className={`w-[1036px] max-h-[500px] object-contain rounded-xl shadow-md transition-opacity ${loaded ? "opacity-100" : "opacity-0"
-                    }`}
+                  className={`w-[1036px] max-h-[500px] object-contain rounded-xl transition-opacity ${
+                    loaded ? "opacity-100" : "opacity-0"
+                  }`}
                   onLoad={() => setLoaded(true)}
                   onError={() => setImgError(true)}
                 />
@@ -120,6 +133,7 @@ export default function CityDetailPage() {
           )}
         </div>
       </section>
+
       {otherImages.length > 0 && (
         <section className="max-w-6xl mx-auto px-4 py-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -141,20 +155,26 @@ export default function CityDetailPage() {
       )}
 
       {isOpen && otherImages.length > 0 && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-          <div className="relative max-w-full max-h-full">
+        <div
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          onClick={() => setIsOpen(false)} 
+        >
+          <div
+            className="relative max-w-full max-h-full"
+            onClick={(e) => e.stopPropagation()} 
+          >
             <img
               src={`data:${getMime(otherImages[photoIndex].file_name)};base64,${otherImages[photoIndex].data}`}
               alt={otherImages[photoIndex].file_name}
               className="w-auto h-auto max-w-full max-h-screen rounded-lg shadow-lg"
             />
+
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-3 right-3 p-2 rounded-full bg-black/60 text-white shadow-lg hover:bg-black/80 transition"
             >
               <X className="w-6 h-6" />
             </button>
-
             <button
               onClick={handlePrev}
               className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 text-white shadow-lg hover:bg-black/80 transition"
@@ -171,6 +191,6 @@ export default function CityDetailPage() {
         </div>
       )}
     </div>
-
   );
 }
+

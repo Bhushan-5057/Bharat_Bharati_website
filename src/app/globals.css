@@ -136,3 +136,12 @@ html, body, #__next {
 }
 
 
+
+.custom-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; 
+}

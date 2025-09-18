@@ -148,7 +148,7 @@ export default function Header() {
                     {item.dropdown.map((drop: any, i: number) => (
                       <li key={i}>
                         {drop.type === "certificate" ||
-                        drop.type === "activity" ? (
+                          drop.type === "activity" ? (
                           <button
                             onClick={() => {
                               if (drop.type === "certificate")
@@ -209,15 +209,13 @@ export default function Header() {
       </div>
 
       <div
-        className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-500 ${
-          menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+        className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-500 ${menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
         onClick={() => setMenuOpen(false)}
       />
       <div
-        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg z-50 transform transition-transform duration-500 ease-in-out ${
-          menuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg z-50 transform transition-transform duration-500 ease-in-out ${menuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b">
           <Link href="/">
@@ -257,9 +255,8 @@ export default function Header() {
                   >
                     {item.name}
                     <svg
-                      className={`w-4 h-4 transform transition-transform ${
-                        openDropdown === item.name ? "rotate-180" : ""
-                      } text-black`}
+                      className={`w-4 h-4 transform transition-transform ${openDropdown === item.name ? "rotate-180" : ""
+                        } text-black`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -273,7 +270,7 @@ export default function Header() {
                     </svg>
                   </button>
 
-                  {openDropdown === item.name && (
+                  {/* {openDropdown === item.name && (
                     <ul className="pl-4 mt-2 space-y-1 text-sm font-normal">
                       {item.dropdown.map((drop: any, i: number) => (
                         <li key={i}>
@@ -303,7 +300,39 @@ export default function Header() {
                         </li>
                       ))}
                     </ul>
+                  )} */}
+                  {openDropdown === item.name && (
+                    <ul
+                      className="pl-4 mt-2 space-y-1 text-sm font-normal
+               max-h-60 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+                    >
+                      {item.dropdown.map((drop: any, i: number) => (
+                        <li key={i}>
+                          {drop.type === "certificate" || drop.type === "activity" ? (
+                            <button
+                              onClick={() => {
+                                if (drop.type === "certificate") handleOpenPublication(drop.id);
+                                else if (drop.type === "activity") handleOpenActivity(drop.id);
+                                setMenuOpen(false);
+                              }}
+                              className="block py-1 w-full text-left hover:text-red-600 text-black"
+                            >
+                              {drop.name}
+                            </button>
+                          ) : (
+                            <Link
+                              href={drop.href}
+                              className="block py-1 hover:text-red-600 text-black"
+                              onClick={() => setMenuOpen(false)}
+                            >
+                              {drop.name}
+                            </Link>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
                   )}
+
                 </div>
               ) : (
                 <Link
