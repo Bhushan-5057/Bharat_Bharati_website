@@ -1,6 +1,7 @@
 "use client";
 
 import { FacebookIcon, InstagramIcon, XIcon } from "@/app/ui/SvgIcons/Icon";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function SocialIcons() {
@@ -36,7 +37,7 @@ export default function SocialIcons() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 
-                   text-white p-2 sm:p-3 rounded-full shadow-lg 
+                   text-white p-3 rounded-full shadow-lg 
                    hover:scale-110 hover:shadow-pink-500/50 transition-transform duration-300"
             >
                 <InstagramIcon className="w-6 h-6 " />
@@ -46,7 +47,7 @@ export default function SocialIcons() {
                 href="https://www.facebook.com/people/Bharat-Bharati/100093554624944/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-blue-600 text-white p-2 sm:p-3 rounded-full shadow-lg 
+                className="bg-blue-600 text-white p-3 rounded-full shadow-lg 
                    hover:scale-110 hover:shadow-blue-400/60 transition-transform duration-300"
             >
                 <FacebookIcon className="w-7 h-7" />
@@ -56,7 +57,7 @@ export default function SocialIcons() {
                 href="https://x.com/bharat_bha92619"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black text-white p-2 sm:p-3 rounded-full shadow-lg 
+                className="bg-black text-white p-3 rounded-full shadow-lg 
                    hover:scale-110 hover:shadow-gray-600/50 transition-transform duration-300"
             >
                 <XIcon className="w-6 h-6" />
