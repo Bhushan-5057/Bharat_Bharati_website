@@ -158,7 +158,7 @@ export default function Header() {
                             }}
                             className="flex items-center px-6 py-2 hover:bg-[#e7470c]/80 hover:text-white transition-colors w-full text-left"
                           >
-                            {drop.name.split(".").slice(0, -1).join(".")}
+                            {drop.type === "certificate" ? drop.name.split(".").slice(0, -1).join(".") : drop.name}
                           </button>
                         ) : (
                           <Link
@@ -286,7 +286,7 @@ export default function Header() {
                               }}
                               className="block py-1 w-full text-left hover:text-red-600 text-black"
                             >
-                              {drop.name}
+                              {drop.type === "certificate" ? drop.name.split(".").slice(0, -1).join(".") : drop.name}
                             </button>
                           ) : (
                             <Link
