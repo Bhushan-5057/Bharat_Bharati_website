@@ -32,7 +32,7 @@ export default function SocialIcons() {
       `}
         >
  
-            <a
+            <Link
                 href="https://www.instagram.com/reel/DJMGl1HsIed/?igsh=MTdkYzVnZmRwbW1kcA%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -41,9 +41,9 @@ export default function SocialIcons() {
                    hover:scale-110 hover:shadow-pink-500/50 transition-transform duration-300"
             >
                 <InstagramIcon className="w-6 h-6 " />
-            </a>
+            </Link>
 
-            <a
+            <Link
                 href="https://www.facebook.com/people/Bharat-Bharati/100093554624944/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -51,9 +51,9 @@ export default function SocialIcons() {
                    hover:scale-110 hover:shadow-blue-400/60 transition-transform duration-300"
             >
                 <FacebookIcon className="w-7 h-7" />
-            </a>
+            </Link>
 
-            <a
+            <Link
                 href="https://x.com/bharat_bha92619"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -61,7 +61,7 @@ export default function SocialIcons() {
                    hover:scale-110 hover:shadow-gray-600/50 transition-transform duration-300"
             >
                 <XIcon className="w-6 h-6" />
-            </a>
+            </Link>
         </div>
     );
 }
