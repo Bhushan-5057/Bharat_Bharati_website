@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import IndianFlagLoader from "./components/Loader/IndianFlagLoader";
+import SocialIcons from "./components/SocialIcons/SocialIcons";
 
 const BannerSection = lazy(() => import("./components/BannerSection/BannerSection"));
 const FeaturesSection = lazy(() => import("./components/FeaturesSection/FeaturesSection"));
@@ -23,6 +24,8 @@ export default function Home() {
       <OfficeBearersSection />
       <FeaturesSection />
       <AppointmentSection />
+
+      <SocialIcons />
     </Suspense>
   );
 }

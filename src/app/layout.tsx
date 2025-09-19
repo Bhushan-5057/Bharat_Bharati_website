@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import RootClient from "./RootClient";
 import { ToastProvider } from "./ui/toast/ToastProvider";
 import LayoutWrapper from "./components/LayoutWrapper";
+import ScrollToTop from "./ui/ScrollToTop/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
           <Providers>
             <ToastProvider>
               <LayoutWrapper>{children}</LayoutWrapper>
+              <ScrollToTop />
             </ToastProvider>
           </Providers>
         </RootClient>
