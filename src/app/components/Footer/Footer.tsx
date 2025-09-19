@@ -127,16 +127,16 @@ export default function Footer() {
         </div>
 
         <div className="flex gap-8 justify-center text-white">
-          <Link href="https://facebook.com" target="_blank" className="hover:text-blue-400 transition">
+          <Link href="https://www.facebook.com/story.php?story_fbid=570215739440242&id=100093554624944&mibextid=wwXIfr&rdid=94mYTmXOvooaQYwS" target="_blank" className="hover:text-blue-400 transition">
             <Facebook size={28} />
           </Link>
-          <Link href="https://instagram.com" target="_blank" className="hover:text-pink-400 transition">
+          <Link href="https://www.instagram.com/reel/DJMGl1HsIed/?igsh=MTdkYzVnZmRwbW1kcA%3D%3D" target="_blank" className="hover:text-pink-400 transition">
             <Instagram size={28} />
           </Link>
-          <Link href="https://youtube.com" target="_blank" className="hover:text-red-500 transition">
+          <Link href="https://www.youtube.com/channel/UCarpJaJuz_c7pDGJFkZx_9Q" target="_blank" className="hover:text-red-500 transition">
             <Youtube size={28} />
           </Link>
-          <Link href="https://twitter.com" target="_blank" className="hover:text-sky-400 transition">
+          <Link href="https://x.com/bharat_bha92619" target="_blank" className="hover:text-sky-400 transition">
             <Twitter size={28} />
           </Link>
         </div>

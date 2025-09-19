@@ -24,7 +24,6 @@ export default function Home() {
       <OfficeBearersSection />
       <FeaturesSection />
       <AppointmentSection />
-
       <SocialIcons />
     </Suspense>
   );

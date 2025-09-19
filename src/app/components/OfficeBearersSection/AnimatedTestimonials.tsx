@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  IconArrowLeft,
-  IconArrowRight,
-  IconBrandTwitter,
-  IconBrandFacebook,
-  IconMail,
-} from "@tabler/icons-react";
+  ChevronLeft,
+  ChevronRight,
+  Twitter,
+  Facebook,
+  Mail,
+} from "lucide-react";
 
 export type Testimonial = {
   quote: string;
@@ -37,7 +37,6 @@ export const AnimatedTestimonials = ({
   const handleNext = () => setActive((prev) => (prev + 1) % testimonials.length);
   const handlePrev = () =>
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-
 
   useEffect(() => {
     if (autoplay) {
@@ -74,11 +73,9 @@ export const AnimatedTestimonials = ({
     );
   }
 
-
   return (
     <div className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
       <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
-
         <div className="relative w-full h-85 md:h-[28rem] lg:h-[25rem] z-20">
           <AnimatePresence>
             {testimonials.map((t, i) =>
@@ -120,8 +117,6 @@ export const AnimatedTestimonials = ({
             )}
           </AnimatePresence>
         </div>
-
-       
         <div className="flex flex-col justify-center items-center py-4 text-center space-y-6 z-30 relative">
           <motion.div
             key={active}
@@ -156,7 +151,6 @@ export const AnimatedTestimonials = ({
                 ))}
               </motion.p>
             )}
-
             <div className="flex gap-4 mt-4 justify-center">
               {testimonials[active].twitter && (
                 <a
@@ -164,7 +158,7 @@ export const AnimatedTestimonials = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <IconBrandTwitter className="h-6 w-6 text-blue-500 hover:scale-110 transition-transform" />
+                  <Twitter className="h-6 w-6 text-blue-500 hover:scale-110 transition-transform" />
                 </a>
               )}
               {testimonials[active].facebook && (
@@ -173,28 +167,29 @@ export const AnimatedTestimonials = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <IconBrandFacebook className="h-6 w-6 text-blue-700 hover:scale-110 transition-transform" />
+                  <Facebook className="h-6 w-6 text-blue-700 hover:scale-110 transition-transform" />
                 </a>
               )}
               {testimonials[active].gmail && (
                 <a href={`mailto:${testimonials[active].gmail}`}>
-                  <IconMail className="h-6 w-6 text-red-500 hover:scale-110 transition-transform" />
+                  <Mail className="h-6 w-6 text-red-500 hover:scale-110 transition-transform" />
                 </a>
               )}
             </div>
           </motion.div>
+
           <div className="flex gap-4 justify-center pt-6">
             <button
               onClick={handlePrev}
               className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
             >
-              <IconArrowLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
+              <ChevronLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
             </button>
             <button
               onClick={handleNext}
               className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
             >
-              <IconArrowRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
+              <ChevronRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
             </button>
           </div>
         </div>
