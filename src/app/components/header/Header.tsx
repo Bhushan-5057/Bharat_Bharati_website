@@ -158,7 +158,7 @@ export default function Header() {
                             }}
                             className="flex items-center px-6 py-2 hover:bg-[#e7470c]/80 hover:text-white transition-colors w-full text-left"
                           >
-                            {drop.name}
+                            {drop.name.split(".").slice(0, -1).join(".")}
                           </button>
                         ) : (
                           <Link
@@ -270,34 +270,6 @@ export default function Header() {
                     </svg>
                   </button>
 
-                  {/* {openDropdown === item.name && (
-                    <ul className="pl-4 mt-2 space-y-1 text-sm font-normal">
-                      {item.dropdown.map((drop: any, i: number) => (
-                        <li key={i}>
-                          {drop.type === "certificate" || drop.type === "activity" ? (
-                            <button
-                              onClick={() => {
-                                if (drop.type === "certificate") handleOpenPublication(drop.id);
-                                else if (drop.type === "activity") handleOpenActivity(drop.id);
-                                setMenuOpen(false);
-                              }}
-                              className="block py-1 w-full text-left hover:text-red-600 text-black"
-                            >
-                              {drop.name}
-                            </button>
-                          ) : (
-                            <Link
-                              href={drop.href}
-                              className="block py-1 hover:text-red-600 text-black"
-                              onClick={() => setMenuOpen(false)}
-                            >
-                              {drop.name}
-                            </Link>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  )} */}
                   {openDropdown === item.name && (
                     <ul
                       className="pl-4 mt-2 space-y-1 text-sm font-normal

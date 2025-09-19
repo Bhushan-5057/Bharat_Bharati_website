@@ -72,7 +72,7 @@ function BlogsPage() {
 
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 ml-5">
-                    <aside className="order-1 lg:order-2 lg:col-span-1 space-y-8 lg:sticky lg:top-24 self-start">
+                    <aside className="order-1 lg:order-2 lg:col-span-1 space-y-4 lg:top-24 self-start">
                         <div className="p-4 rounded-2xl">
                             <div className="flex items-center gap-2 border border-gray-300 rounded-full px-3 py-2">
                                 <Search className="w-5 h-5 text-gray-500" />
