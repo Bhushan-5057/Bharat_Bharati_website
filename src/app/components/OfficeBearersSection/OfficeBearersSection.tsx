@@ -15,13 +15,15 @@ export default function OfficeBearersSection() {
   useEffect(() => {
     dispatch(fetchTestimonials());
   }, [dispatch]);
+
   if (error) {
     return <p className="text-center py-10 text-red-500">{error}</p>;
   }
+
   if (loading) {
     return (
       <section className="py-12 text-center">
-        <h2 className="text-3xl font-bold mb-6 relative inline-block">
+        <h2 className="text-3xl font-bold mb-6 relative inline-block text-black">
           Office Bearers
           <span
             className="absolute left-1/2 top-full mt-2 block h-1 w-24 rounded-full -translate-x-1/2"
@@ -48,7 +50,9 @@ export default function OfficeBearersSection() {
       </section>
     );
   }
+
   if (!testimonials.length) return null;
+
   const mappedTestimonials: Testimonial[] = testimonials.map((t) => ({
     name: t.title,
     designation: t.designation,
@@ -61,7 +65,7 @@ export default function OfficeBearersSection() {
 
   return (
     <section className="py-12 text-center">
-      <h2 className="text-3xl font-bold mb-6 relative inline-block">
+      <h2 className="text-3xl font-bold mb-6 relative inline-block text-black">
         Office Bearers
         <span
           className="absolute left-1/2 top-full mt-2 block h-1 w-24 rounded-full -translate-x-1/2"

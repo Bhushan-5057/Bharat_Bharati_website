@@ -2,13 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Twitter,
-  Facebook,
-  Mail,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Twitter, Facebook, Mail } from "lucide-react";
 
 export type Testimonial = {
   quote: string;
@@ -117,6 +111,7 @@ export const AnimatedTestimonials = ({
             )}
           </AnimatePresence>
         </div>
+
         <div className="flex flex-col justify-center items-center py-4 text-center space-y-6 z-30 relative">
           <motion.div
             key={active}
@@ -125,15 +120,11 @@ export const AnimatedTestimonials = ({
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
-            <h3 className="text-2xl font-bold text-black dark:text-white">
-              {testimonials[active].name}
-            </h3>
-            <p className="text-sm text-gray-500 dark:text-neutral-500">
-              {testimonials[active].designation}
-            </p>
+            <h3 className="text-2xl font-bold text-black">{testimonials[active].name}</h3>
+            <p className="text-sm text-black">{testimonials[active].designation}</p>
 
             {testimonials[active].quote && (
-              <motion.p className="mt-4 text-lg text-gray-500 dark:text-neutral-300">
+              <motion.p className="mt-4 text-lg text-black">
                 {testimonials[active].quote.split(" ").map((word, index) => (
                   <motion.span
                     key={index}
@@ -151,6 +142,7 @@ export const AnimatedTestimonials = ({
                 ))}
               </motion.p>
             )}
+
             <div className="flex gap-4 mt-4 justify-center">
               {testimonials[active].twitter && (
                 <a
@@ -172,7 +164,7 @@ export const AnimatedTestimonials = ({
               )}
               {testimonials[active].gmail && (
                 <a href={`mailto:${testimonials[active].gmail}`}>
-                  <Mail className="h-6 w-6 text-red-500 hover:scale-110 transition-transform" />
+                 <Mail className="h-6 w-6 text-red-500 hover:scale-110 transition-transform" />
                 </a>
               )}
             </div>
@@ -181,15 +173,15 @@ export const AnimatedTestimonials = ({
           <div className="flex gap-4 justify-center pt-6">
             <button
               onClick={handlePrev}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100"
             >
-              <ChevronLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
+              <ChevronLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12" />
             </button>
             <button
               onClick={handleNext}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100"
             >
-              <ChevronRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
+              <ChevronRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12" />
             </button>
           </div>
         </div>

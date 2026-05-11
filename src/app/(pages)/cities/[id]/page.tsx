@@ -50,6 +50,7 @@ export default function CityDetailPage() {
     );
   };
 
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -62,6 +63,16 @@ export default function CityDetailPage() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, otherImages.length]);
+
+  const splitDescription = (text: string, limit: number = 297) => {
+    if (!text) return { part1: "", part2: "" };
+    if (text.length <= limit) return { part1: text, part2: "" };
+
+    const part1 = text.slice(0, limit);
+    const part2 = text.slice(limit);
+
+    return { part1, part2 };
+  };
 
   return (
     <div
@@ -108,9 +119,8 @@ export default function CityDetailPage() {
                 <img
                   src={`data:${getMime(mainImage.file_name)};base64,${mainImage.data}`}
                   alt={mainImage.file_name}
-                  className={`w-[1036px] max-h-[500px] object-contain rounded-xl transition-opacity ${
-                    loaded ? "opacity-100" : "opacity-0"
-                  }`}
+                  className={`w-[1036px] max-h-[500px] object-contain rounded-xl transition-opacity ${loaded ? "opacity-100" : "opacity-0"
+                    }`}
                   onLoad={() => setLoaded(true)}
                   onError={() => setImgError(true)}
                 />
@@ -120,17 +130,19 @@ export default function CityDetailPage() {
         </div>
 
         <div>
-          {loading ? (
-            <div className="space-y-3">
-              <div className="h-3 bg-gray-200 rounded w-full animate-pulse"></div>
-              <div className="h-3 bg-gray-200 rounded w-5/6 animate-pulse"></div>
-              <div className="h-3 bg-gray-200 rounded w-4/6 animate-pulse"></div>
-            </div>
-          ) : (
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed text-justify mb-6">
-              {cityDetail?.description}
-            </p>
-          )}
+          {!loading && cityDetail?.description && (() => {
+            const { part1, part2 } = splitDescription(cityDetail.description);
+
+            return (
+              <div className="text-[18px] text-[#5E6FA6] leading-[1.8] text-justify font-semibold mb-6">
+                <p>{part1}</p>
+                {part2 && (
+                  <p className="mt-4">{part2}</p>
+                )}
+              </div>
+            );
+          })()}
+
         </div>
       </section>
 
@@ -157,11 +169,11 @@ export default function CityDetailPage() {
       {isOpen && otherImages.length > 0 && (
         <div
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
-          onClick={() => setIsOpen(false)} 
+          onClick={() => setIsOpen(false)}
         >
           <div
             className="relative max-w-full max-h-full"
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()}
           >
             <img
               src={`data:${getMime(otherImages[photoIndex].file_name)};base64,${otherImages[photoIndex].data}`}

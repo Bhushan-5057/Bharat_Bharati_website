@@ -22,7 +22,6 @@ export default function FeaturesSection() {
 
   const skeletonArray = Array(4).fill(0);
 
- 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
     setIsDown(true);
@@ -37,7 +36,7 @@ export default function FeaturesSection() {
     if (!isDown || !scrollRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 1; 
+    const walk = (x - startX) * 1;
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
@@ -46,8 +45,7 @@ export default function FeaturesSection() {
       className="py-12 px-4 max-w-7xl mx-auto"
       style={{ fontFamily: "var(--font-jost)" }}
     >
-      
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 relative">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 relative text-black">
         Serving the Nation with Pride
         <span
           className="absolute left-1/2 block h-1 w-48 rounded-full -translate-x-1/2"
@@ -74,7 +72,6 @@ export default function FeaturesSection() {
       ) : error ? (
         <p className="text-center py-10 text-red-500">{error}</p>
       ) : features.length <= 4 ? (
-      
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {features.map((feature, index) => (
             <div
@@ -85,8 +82,8 @@ export default function FeaturesSection() {
                 className="mb-4 w-16 h-16"
                 dangerouslySetInnerHTML={{ __html: atob(feature.data) }}
               ></div>
-              <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-              <p className="text-gray-700">{feature.description}</p>
+              <h3 className="font-semibold text-lg mb-2 text-black">{feature.title}</h3>
+              <p className="text-black">{feature.description}</p>
             </div>
           ))}
         </div>
@@ -108,8 +105,8 @@ export default function FeaturesSection() {
                 className="mb-4 w-16 h-16"
                 dangerouslySetInnerHTML={{ __html: atob(feature.data) }}
               ></div>
-              <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-              <p className="text-gray-700">{feature.description}</p>
+              <h3 className="font-semibold text-lg mb-2 text-black">{feature.title}</h3>
+              <p className="text-black">{feature.description}</p>
             </div>
           ))}
         </div>
@@ -117,5 +114,3 @@ export default function FeaturesSection() {
     </section>
   );
 }
-
-

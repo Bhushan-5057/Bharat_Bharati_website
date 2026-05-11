@@ -59,10 +59,38 @@ export default function SchoolDetailPage() {
     );
   };
 
+  const descriptionLines =
+    schoolDetail?.description
+      ?.split(".")
+      .map((line: string) => line.trim())
+      .filter(Boolean) || [];
+
+  const firstPart = descriptionLines.slice(0, 5);
+  const secondPart = descriptionLines.slice(5);
+
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      } else if (e.key === "ArrowRight") {
+        handleNext();
+      } else if (e.key === "ArrowLeft") {
+        handlePrev();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, otherImages.length]);
+
+
   return (
     <div
       className="min-h-screen bg-[linear-gradient(90deg,#ffffff_0%,#f5f9ff_50%,#e6f0ff_100%)] text-gray-800"
-      style={{ fontFamily: 'var(--font-jost)' }}
+      style={{ fontFamily: "var(--font-jost)" }}
     >
       <header className="max-w-7xl mx-auto px-4 pt-10 pb-6">
         <div className="flex items-center justify-center text-gray-400 mb-2">
@@ -78,7 +106,9 @@ export default function SchoolDetailPage() {
           </div>
         ) : (
           <>
-            <h1 className="text-4xl text-[#222222] font-bold text-center">{mainTitle}</h1>
+            <h1 className="text-4xl text-[#222222] font-bold text-center">
+              {mainTitle}
+            </h1>
             {subTitle && (
               <h2 className="text-2xl text-gray-700 font-semibold text-center mt-1">
                 ({subTitle})
@@ -116,7 +146,8 @@ export default function SchoolDetailPage() {
               )}
               {!imgError && (
                 <img
-                  src={`data:${getMime(mainImage.file_name)};base64,${mainImage.data}`}
+                  src={`data:${getMime(mainImage.file_name)};base64,${mainImage.data
+                    }`}
                   alt={mainImage.file_name}
                   className={`w-[1036px] max-h-[500px] object-contain rounded-lg  ${loaded ? "block" : "hidden"
                     }`}
@@ -136,16 +167,47 @@ export default function SchoolDetailPage() {
               <div className="h-3 bg-gray-200 rounded w-4/6 animate-pulse"></div>
             </div>
           ) : (
-            <p className="text-sm text-gray-700 leading-relaxed text-justify mb-6">
-              {schoolDetail?.description
-                ?.split("BHARAT BHARATI")
-                .map((part: string, i: number, arr: string[]) => (
-                  <span key={i}>
-                    {part}
-                    {i < arr.length - 1 && <strong>BHARAT BHARATI</strong>}
-                  </span>
-                ))}
-            </p>
+            <div className="text-[15px] text-[#5E6FA6] leading-[1.8] text-justify font-semibold mb-6">
+              {firstPart.map((line: string, i: number) => (
+                <span key={i}>
+                  {line
+                    .split("BHARAT BHARATI")
+                    .map((part: string, idx: number, arr: string[]) => (
+                      <span key={idx}>
+                        {part}
+                        {idx < arr.length - 1 && (
+                          <strong className="text-[#004080]">
+                            BHARAT BHARATI
+                          </strong>
+                        )}
+                      </span>
+                    ))}
+                  <br />
+                </span>
+              ))}
+
+              {secondPart.length > 0 && (
+                <p className="mt-4">
+                  {secondPart.map((line: string, i: number) => (
+                    <span key={i}>
+                      {line
+                        .split("BHARAT BHARATI")
+                        .map((part: string, idx: number, arr: string[]) => (
+                          <span key={idx}>
+                            {part}
+                            {idx < arr.length - 1 && (
+                              <strong className="text-[#004080]">
+                                BHARAT BHARATI
+                              </strong>
+                            )}
+                          </span>
+                        ))}
+                      <br />
+                    </span>
+                  ))}
+                </p>
+              )}
+            </div>
           )}
           <div className="mt-6">
             {loading ? (
@@ -234,6 +296,5 @@ export default function SchoolDetailPage() {
         </div>
       )}
     </div>
-
   );
 }
