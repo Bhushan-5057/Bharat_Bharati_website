@@ -1,16 +1,124 @@
 "use client";
+
+import { useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Youtube, Twitter } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
 import { IMAGES } from "@/app/lib/uilts";
-import { nationalExecutiveBody } from "@/app/lib/uilts";
-import { nationalCommitteeMembers } from "@/app/lib/uilts";
+import { AppDispatch, RootState } from "@/store/redux/store";
+import { fetchMembers, Member } from "@/store/redux/slices/membersSlice";
+
+const splitMembers = (members: Member[]) => {
+  const middle = Math.ceil(members.length / 2);
+  return [members.slice(0, middle), members.slice(middle)];
+};
+
+const normalizeCategory = (category: string) =>
+  category.toLowerCase().replace(/\s+/g, " ").trim();
+
+const getMemberCategoryKey = (category: string) => {
+  const normalizedCategory = normalizeCategory(category);
+
+  if (
+    normalizedCategory.includes("national core") &&
+    (normalizedCategory.includes("commitee") ||
+      normalizedCategory.includes("committee"))
+  ) {
+    return "national core commitee";
+  }
+
+  if (
+    normalizedCategory.includes("national excutive") ||
+    normalizedCategory.includes("national executive")
+  ) {
+    return "national excutive council";
+  }
+
+  return normalizedCategory || "members";
+};
+
+const orderedCategoryLabels: Record<string, string> = {
+  "national core commitee": "National Core Committee",
+  "national excutive council": "National Executive Council",
+};
+
+const MembersCategory = ({
+  category,
+  members,
+}: {
+  category: string;
+  members: Member[];
+}) => {
+  const [leftMembers, rightMembers] = splitMembers(members);
+
+  return (
+    <div className="mb-12 last:mb-16">
+      <h3 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-6 inline-block border-b-2 border-[#ffc107] pb-1">
+        {category}
+      </h3>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center text-left mt-4">
+        {[leftMembers, rightMembers].map((columnMembers, columnIndex) => (
+          <ul key={columnIndex} className="space-y-2 break-words">
+            {columnMembers.map((item) => (
+              <li
+                key={item.id}
+                className="mb-5 text-[20px] font-semibold break-words"
+              >
+                <span className="text-[#ffc107]">{"\u25B6"}</span> {item.name}
+                {item.designation && (
+                  <span className="text-[#ffc107]"> - {item.designation}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function Footer() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { members, loading, error } = useSelector(
+    (state: RootState) => state.members
+  );
+
+  useEffect(() => {
+    dispatch(fetchMembers());
+  }, [dispatch]);
+
+  const membersByCategory = useMemo(() => {
+    return members.reduce<Record<string, Member[]>>((groupedMembers, member) => {
+      const categoryKey = getMemberCategoryKey(member.category || "Members");
+      groupedMembers[categoryKey] = groupedMembers[categoryKey] ?? [];
+      groupedMembers[categoryKey].push(member);
+      return groupedMembers;
+    }, {});
+  }, [members]);
+
+const memberCategories = useMemo(() => {
+  const categoryOrder = [
+    "national core commitee",
+    "national excutive council",
+  ];
+
+  return Object.entries(membersByCategory)
+    .sort(([a], [b]) => {
+      return categoryOrder.indexOf(a) - categoryOrder.indexOf(b);
+    })
+    .map(([categoryKey, members]) => ({
+      category:
+        orderedCategoryLabels[categoryKey] || categoryKey,
+      members,
+    }));
+}, [membersByCategory]);
+
   return (
-    <footer style={{ fontFamily: 'var(--font-jost)' }}>
+    <footer style={{ fontFamily: "var(--font-jost)" }}>
       <div
-        className="w-full text-white bg-cover bg-center relative "
+        className="w-full text-white bg-cover bg-center relative"
         style={{ backgroundImage: `url(${IMAGES.Footer})` }}
       >
         <div className="absolute inset-0 bg-black/80 z-0"></div>
@@ -18,76 +126,34 @@ export default function Footer() {
         <div
           className="relative z-10 w-full max-w-7xl mx-auto px-4 py-12 text-center"
           style={{
-            fontFamily: 'var(--font-jost)',
-            fontSize: '20px',
-            letterSpacing: '0.1em',
-            margin: '20px auto',
+            fontFamily: "var(--font-jost)",
+            fontSize: "20px",
+            letterSpacing: "0.1em",
+            margin: "20px auto",
           }}
         >
-
-          <div className="mb-12">
-            <h3 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-6 inline-block border-b-2 border-[#ffc107] pb-1">
-              National Executive Body
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center text-left">
-              <ul className="space-y-2 break-words">
-                {nationalExecutiveBody
-                  .slice(0, Math.ceil(nationalExecutiveBody.length / 2))
-                  .map((item) => (
-                    <li key={item.id} className="mb-5 text-[20px] font-semibold break-words">
-                      <span className="text-[#ffc107]">▶</span> {item.name}
-                      {item.designation && (
-                        <span className="text-[#ffc107]"> — {item.designation}</span>
-                      )}
-                    </li>
-                  ))}
-              </ul>
-
-              <ul className="space-y-2 break-words">
-                {nationalExecutiveBody
-                  .slice(Math.ceil(nationalExecutiveBody.length / 2))
-                  .map((item) => (
-                    <li key={item.id} className="mb-5 text-[20px] font-semibold break-words">
-                      <span className="text-[#ffc107]">▶</span> {item.name}
-                      {item.designation && (
-                        <span className="text-[#ffc107]"> — {item.designation}</span>
-                      )}
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          </div>
-
-
-          <div className="mb-16">
-            <h3 className="text-xl md:text-4xl font-bold text-yellow-400 mb-6 inline-block border-b-2 border-[#ffc107] pb-1">
-              National Committee Members
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center text-left">
-              <ul className="space-y-2 break-words">
-                {nationalCommitteeMembers
-                  .slice(0, Math.ceil(nationalCommitteeMembers.length / 2))
-                  .map((item) => (
-                    <li key={item.id} className="mb-5 text-[20px] font-semibold break-words">
-                      <span className="text-[#ffc107]">▶</span> {item.name}
-                    </li>
-                  ))}
-              </ul>
-              <ul className="space-y-2 break-words">
-                {nationalCommitteeMembers
-                  .slice(Math.ceil(nationalCommitteeMembers.length / 2))
-                  .map((item) => (
-                    <li key={item.id} className="mb-5 mt-4 text-[20px] font-semibold break-words">
-                      <span className="text-[#ffc107]">▶</span> {item.name}
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          </div>
+          {loading ? (
+            <p className="mb-16 text-[20px] font-semibold text-white">
+              Loading members...
+            </p>
+          ) : error ? (
+            <p className="mb-16 text-[20px] font-semibold text-white">
+              Members are not available right now.
+            </p>
+          ) : memberCategories.length === 0 ? (
+            <p className="mb-16 text-[20px] font-semibold text-white">
+              No members found.
+            </p>
+          ) : (
+            memberCategories.map(({ category, members: categoryMembers }) => (
+              <MembersCategory
+                key={category}
+                category={category}
+                members={categoryMembers}
+              />
+            ))
+          )}
         </div>
-
       </div>
 
       <div
@@ -100,11 +166,9 @@ export default function Footer() {
           className="w-full max-w-md mx-auto object-contain"
         />
 
-        <h4
-          className="text-lg font-extrabold tracking-widest mb-6 mt-4 opacity-80"
-          style={{ color: '#34498c' }}
-        >
-          N a m a s t e
+        <h4 className="text-lg font-extrabold tracking-widest italic mb-6 mt-4">
+          <span style={{ color: "#ff9b05" }}>Vande</span>{" "}
+          <span style={{ color: "#2eec08" }}>Mataram</span>
         </h4>
 
         <div className="mb-10">
@@ -127,16 +191,32 @@ export default function Footer() {
         </div>
 
         <div className="flex gap-8 justify-center text-white">
-          <Link href="https://www.facebook.com/story.php?story_fbid=570215739440242&id=100093554624944&mibextid=wwXIfr&rdid=94mYTmXOvooaQYwS" target="_blank" className="hover:text-blue-400 transition">
+          <Link
+            href="https://www.facebook.com/story.php?story_fbid=570215739440242&id=100093554624944&mibextid=wwXIfr&rdid=94mYTmXOvooaQYwS"
+            target="_blank"
+            className="hover:text-blue-400 transition"
+          >
             <Facebook size={28} />
           </Link>
-          <Link href="https://www.instagram.com/reel/DJMGl1HsIed/?igsh=MTdkYzVnZmRwbW1kcA%3D%3D" target="_blank" className="hover:text-pink-400 transition">
+          <Link
+            href="https://www.instagram.com/reel/DJMGl1HsIed/?igsh=MTdkYzVnZmRwbW1kcA%3D%3D"
+            target="_blank"
+            className="hover:text-pink-400 transition"
+          >
             <Instagram size={28} />
           </Link>
-          <Link href="https://www.youtube.com/channel/UCarpJaJuz_c7pDGJFkZx_9Q" target="_blank" className="hover:text-red-500 transition">
+          <Link
+            href="https://www.youtube.com/channel/UCarpJaJuz_c7pDGJFkZx_9Q"
+            target="_blank"
+            className="hover:text-red-500 transition"
+          >
             <Youtube size={28} />
           </Link>
-          <Link href="https://x.com/bharat_bha92619" target="_blank" className="hover:text-sky-400 transition">
+          <Link
+            href="https://x.com/bharat_bha92619"
+            target="_blank"
+            className="hover:text-sky-400 transition"
+          >
             <Twitter size={28} />
           </Link>
         </div>
@@ -145,7 +225,8 @@ export default function Footer() {
       <div className="bg-[#012146] py-4 text-xs lg:text-sm md:text-sm">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-3 px-6">
           <p className="text-gray-300">
-            © {new Date().getFullYear()} Bharat Bharti. All Rights Reserved.{" "}
+            &copy; {new Date().getFullYear()} Bharat Bharti. All Rights
+            Reserved.{" "}
             <Link href="/" className="underline hover:text-white">
               Home
             </Link>
@@ -164,6 +245,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-
   );
 }

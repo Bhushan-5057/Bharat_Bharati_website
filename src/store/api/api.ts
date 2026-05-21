@@ -135,3 +135,8 @@ export const getBlogBySlug = async (slug: string) => {
   const response = await axiosInstance.get(`/blogs/get/${slug}`);
   return response.data;
 };
+
+export const getAllMembers = async () => {
+  const response = await axiosInstance.get("/members/get-all?limit=1000");
+  return response.data?.data ?? response.data;
+};

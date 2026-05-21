@@ -14,6 +14,7 @@ import galleryReducer from "@/store/redux/slices/gallerySlice";
 import videosReducer from "@/store/redux/slices/videoSlice";
 import donationReducer from "@/store/redux/slices/donationSlice";
 import blogReducer from "@/store/redux/slices/blogSlice";
+import membersReducer from "@/store/redux/slices/membersSlice";
 
 export const store = configureStore({
   reducer: {
@@ -32,6 +33,7 @@ export const store = configureStore({
     videos: videosReducer,
     donations: donationReducer,
     blogs: blogReducer,
+    members: membersReducer,
   },
 });
 

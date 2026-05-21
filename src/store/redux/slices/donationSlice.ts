@@ -4,13 +4,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export interface Donation {
   id: number;
-  title: string;
-  description: string;
-  sub_title: string;
   account_holder_name: string;
   account_number: string;
   bank_name: string;
   ifsc_code: string;
+  upi_id: string;
   file_name: string;
   data: string;
 }
